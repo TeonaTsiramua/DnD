@@ -46,7 +46,7 @@ export const GlobalStyles = styled.createGlobalStyle`
     align-items: center;
     min-height: 100vh;
     justify-content: center;
-    padding-top: 100px;
+    overflow: hidden;
   }
 
   /* make images easier to work with */
