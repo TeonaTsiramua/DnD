@@ -37,6 +37,14 @@ const Home = () => {
             Drag icons to their corresponding words. Match them all to win!
           </SGameDescription>
         </SGameLink>
+
+        <SGameLink to='/sentence'>
+          <SGameTitle>Make Sentence</SGameTitle>
+          <SGameDescription>
+            Engage in a fun and interactive learning experience! Drag and drop
+            icons to their corresponding words to form a complete sentence.
+          </SGameDescription>
+        </SGameLink>
       </SGameSection>
     </SContainer>
   );

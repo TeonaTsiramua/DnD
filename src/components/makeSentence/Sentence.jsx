@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useSentenceState } from '../../hooks/useSentenceState';
 import {
   fourWordSentence,
@@ -5,9 +6,11 @@ import {
   get7Steps,
   threeWordSentence,
 } from '../../pages/makeSentence/data';
+import Result from './Result';
 
 import {
   SBox,
+  SButton,
   SContainer,
   SFadedWord,
   SFadedWrapper,
@@ -16,6 +19,8 @@ import {
 } from './styles';
 
 const Sentence = ({ words }) => {
+  const [result, setResult] = useState(false);
+
   const {
     selectedWords,
     fadedWords,
@@ -24,37 +29,64 @@ const Sentence = ({ words }) => {
     refs,
     handleDragStart,
     handleDragEnd,
+    clearSelectedWords,
+    goBack,
   } = useSentenceState(
     words === 3 ? threeWordSentence : fourWordSentence,
     words === 3 ? get5Steps : get7Steps
   );
+
+  const hanleReset = () => {
+    clearSelectedWords();
+    setResult(false);
+  };
+
+  const handleGoBack = () => {
+    goBack();
+    setResult(false);
+  };
+
+  const dragProps = (item) => ({
+    drag: !fadedWords.includes(item),
+    dragConstraints: { top: 0, bottom: 0, left: 0, right: 0 },
+    dragElastic: 1,
+    onDragStart: () => handleDragStart(item),
+    onDragEnd: (event, info) => handleDragEnd(event, info, item),
+    whileHover: {
+      scale: 1.1,
+      cursor: 'grab',
+    },
+    whileDrag: {
+      scale: 1.2,
+      boxShadow: '0 0 10px yellow',
+      cursor: 'grabbing',
+      zIndex: 10,
+    },
+  });
 
   return (
     <SContainer>
       <SWrapper>
         <SFadedWrapper>
           {currentWords.map((item) => (
-            <SFadedWord key={item.id}>{item.label || item.word}</SFadedWord>
+            <SFadedWord $label={item.label} key={item.id}>
+              {item.label || item.word}
+            </SFadedWord>
           ))}
         </SFadedWrapper>
+
         {currentWords.map((item) => (
           <SWord
-            drag={!fadedWords.includes(item)}
-            dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
-            dragElastic={1}
-            onDragStart={() => handleDragStart(item)}
-            onDragEnd={(event, info) => handleDragEnd(event, info, item)}
-            whileHover={
-              !fadedWords.includes(item) && { scale: 1.1, cursor: 'grab' }
-            }
-            whileDrag={{ scale: 1.2, cursor: 'grabbing', zIndex: 10 }}
+            {...dragProps(item)}
             key={item.word}
             $faded={fadedWords.includes(item)}
+            $label={item.label}
           >
             {item.label || item.word}
           </SWord>
         ))}
       </SWrapper>
+
       <SWrapper>
         {selectedWords &&
           Object.entries(selectedWords).map(([boxType, selectedItem]) => (
@@ -64,28 +96,39 @@ const Sentence = ({ words }) => {
               $highlighted={highlightedBox === boxType}
             >
               {selectedItem && (
-                <SWord>{selectedItem.label || selectedItem.word}</SWord>
+                <SWord $label={selectedItem.label}>
+                  {selectedItem.label || selectedItem.word}
+                </SWord>
               )}
             </SBox>
           ))}
       </SWrapper>
-      {selectedWords.verb && (
-        <p>
-          {selectedWords.noun1.word}
-          {selectedWords.sign1 &&
-            selectedWords.sign1.word !== '-' &&
-            selectedWords.sign1.word}{' '}
-          {selectedWords.noun2.word}
-          {selectedWords.sign2 &&
-            selectedWords.sign2.word !== '-' &&
-            selectedWords.sign2.word}{' '}
-          {selectedWords.noun3 && selectedWords.noun3.word}
-          {selectedWords.sign3 &&
-            selectedWords.sign3.word !== '-' &&
-            selectedWords.sign3.word}{' '}
-          {selectedWords.verb.word}
-        </p>
-      )}
+
+      <SWrapper>
+        <SButton
+          disabled={!selectedWords.noun1}
+          onClick={hanleReset}
+          data-tooltip='Reset'
+        >
+          🔄
+        </SButton>
+        <SButton
+          disabled={!selectedWords.noun1}
+          onClick={handleGoBack}
+          data-tooltip='Go Back'
+        >
+          ⬅️
+        </SButton>
+        <SButton
+          disabled={!selectedWords.verb}
+          data-tooltip='Submit'
+          onClick={() => setResult(true)}
+        >
+          ✅
+        </SButton>
+      </SWrapper>
+
+      {result && selectedWords.verb && <Result selectedWords={selectedWords} />}
     </SContainer>
   );
 };

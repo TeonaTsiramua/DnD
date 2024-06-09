@@ -52,6 +52,42 @@ export const useSentenceState = (sentence, getSteps) => {
     getSteps,
   });
 
+  const clearSelectedWords = () => {
+    setSelectedWords(sentence);
+    setStep(0);
+    setHighlightedBox(null);
+    setFadedWords([]);
+  };
+  const goBack = () => {
+    if (step === 0) {
+      clearSelectedWords();
+      return;
+    }
+
+    setStep((prevStep) => prevStep - 1);
+    setHighlightedBox(null);
+
+    setSelectedWords((prevSelectedWords) => {
+      const newSelectedWords = { ...prevSelectedWords };
+
+      const keys = Object.keys(newSelectedWords);
+      const lastKey = keys[step - 1];
+
+      newSelectedWords[lastKey] = null;
+
+      return newSelectedWords;
+    });
+
+    setFadedWords(() => {
+      const newFadedWords = currentWords.filter((item) =>
+        Object.values(selectedWords).some(
+          (selectedItem) => selectedItem && selectedItem.word === item.word
+        )
+      );
+      return newFadedWords;
+    });
+  };
+
   return {
     selectedWords,
     fadedWords,
@@ -60,5 +96,7 @@ export const useSentenceState = (sentence, getSteps) => {
     refs,
     handleDragStart,
     handleDragEnd,
+    clearSelectedWords,
+    goBack,
   };
 };
