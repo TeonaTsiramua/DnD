@@ -38,6 +38,7 @@ export const GlobalStyles = styled.createGlobalStyle`
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(250deg, #7b2ff7, #f107a3);
     color: white;
+    overflow: hidden;
   }
 
   #root {
