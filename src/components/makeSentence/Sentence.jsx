@@ -54,7 +54,7 @@ const Sentence = ({ words }) => {
     onDragEnd: (event, info) => handleDragEnd(event, info, item),
     whileHover: {
       scale: 1.1,
-      cursor: 'grab',
+      cursor: !fadedWords.includes(item) ? 'grab' : 'not-allowed',
     },
     whileDrag: {
       scale: 1.2,
