@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { words } from '../pages/makeSentence/data';
+import { getWords } from '../utils/sentence';
 import useWordDrag from './useWordDrag';
 
 export const useSentenceState = (sentence, getSteps) => {
@@ -12,17 +12,7 @@ export const useSentenceState = (sentence, getSteps) => {
   const getCurrentWords = useCallback(() => {
     const selectedWordsLength = Object.keys(selectedWords).length;
 
-    if (step === selectedWordsLength) {
-      return [];
-    } else if (step === selectedWordsLength - 1) {
-      return words.flatMap((word) => word.verb);
-    } else if (step % 2 === 0) {
-      return words.flatMap((word) => word.noun);
-    } else if (step % 2 === 1) {
-      return words.flatMap((word) => word.sign);
-    } else {
-      return [];
-    }
+    return getWords(step, selectedWordsLength);
   }, [step, selectedWords]);
 
   useEffect(() => {

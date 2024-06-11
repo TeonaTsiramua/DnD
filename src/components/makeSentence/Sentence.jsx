@@ -5,7 +5,7 @@ import {
   get5Steps,
   get7Steps,
   threeWordSentence,
-} from '../../pages/makeSentence/data';
+} from '../../utils/sentence';
 import Result from './Result';
 
 import {
@@ -46,23 +46,25 @@ const Sentence = ({ words }) => {
     setResult(false);
   };
 
-  const dragProps = (item) => ({
-    drag: !fadedWords.includes(item),
-    dragConstraints: { top: 0, bottom: 0, left: 0, right: 0 },
-    dragElastic: 1,
-    onDragStart: () => handleDragStart(item),
-    onDragEnd: (event, info) => handleDragEnd(event, info, item),
-    whileHover: {
-      scale: 1.1,
-      cursor: !fadedWords.includes(item) ? 'grab' : 'not-allowed',
-    },
-    whileDrag: {
-      scale: 1.2,
-      boxShadow: '0 0 10px yellow',
-      cursor: 'grabbing',
-      zIndex: 10,
-    },
-  });
+  const dragProps = (item) =>
+    !selectedWords.verb &&
+    !fadedWords.includes(item) && {
+      drag: true,
+      dragConstraints: { top: 0, bottom: 0, left: 0, right: 0 },
+      dragElastic: 1,
+      onDragStart: () => handleDragStart(item),
+      onDragEnd: (event, info) => handleDragEnd(event, info, item),
+      whileHover: {
+        scale: 1.1,
+        cursor: 'grab',
+      },
+      whileDrag: {
+        scale: 1.2,
+        boxShadow: '0 0 10px yellow',
+        cursor: 'grabbing',
+        zIndex: 10,
+      },
+    };
 
   return (
     <SContainer>

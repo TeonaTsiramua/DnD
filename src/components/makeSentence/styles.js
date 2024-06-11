@@ -42,6 +42,7 @@ export const SWord = styled(motion.div)`
   z-index: 2;
   opacity: ${({ $faded }) => ($faded ? 0 : 1)};
   font-size: ${({ $label }) => ($label ? '2rem' : '1.2rem')};
+  cursor: ${({ $faded }) => $faded && 'not-allowed'};
 `;
 
 export const SFadedWord = styled(SWord)`
