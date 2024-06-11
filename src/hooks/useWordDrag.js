@@ -29,11 +29,13 @@ const useWordDrag = ({ step, handleSelect, setHighlightedBox, getSteps }) => {
   const isInBox = (info, boxRef) => {
     if (!boxRef.current) return false;
     const box = boxRef.current.getBoundingClientRect();
+    const scrollX = window.scrollX || window.pageXOffset;
+    const scrollY = window.scrollY || window.pageYOffset;
     return (
-      info.point.x >= box.left &&
-      info.point.x <= box.right &&
-      info.point.y >= box.top &&
-      info.point.y <= box.bottom
+      info.point.x >= box.left + scrollX &&
+      info.point.x <= box.right + scrollX &&
+      info.point.y >= box.top + scrollY &&
+      info.point.y <= box.bottom + scrollY
     );
   };
 
