@@ -1,4 +1,4 @@
-export const words = [
+export const wordsData = [
   {
     noun: [
       { id: 1, label: '🍌', word: 'ბანან' },

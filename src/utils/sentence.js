@@ -1,5 +1,3 @@
-import { words } from '../data';
-
 export const refKeys = [
   'noun1',
   'sign1',
@@ -29,7 +27,7 @@ export const getSteps = (step, count) => {
 export const get5Steps = (step) => getSteps(step, 5);
 export const get7Steps = (step) => getSteps(step, 7);
 
-export const getWords = (step, wordsLength) => {
+export const getWords = (step, words, wordsLength) => {
   switch (step) {
     case wordsLength:
       return [];

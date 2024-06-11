@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { getWords } from '../utils/sentence';
 import useWordDrag from './useWordDrag';
 
-export const useSentenceState = (sentence, getSteps) => {
+export const useSentenceState = (words, sentence, getSteps) => {
   const [step, setStep] = useState(0);
   const [selectedWords, setSelectedWords] = useState(sentence);
   const [highlightedBox, setHighlightedBox] = useState(null);
@@ -12,8 +12,8 @@ export const useSentenceState = (sentence, getSteps) => {
   const getCurrentWords = useCallback(() => {
     const selectedWordsLength = Object.keys(selectedWords).length;
 
-    return getWords(step, selectedWordsLength);
-  }, [step, selectedWords]);
+    return getWords(step, words, selectedWordsLength);
+  }, [step, words, selectedWords]);
 
   useEffect(() => {
     const newCurrentWords = getCurrentWords();

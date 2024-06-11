@@ -15,3 +15,16 @@ export const SWrapper = styled.div`
   justify-content: center;
   gap: 1rem;
 `;
+
+export const SButton = styled.button`
+  font-size: 1.5rem;
+  padding: 0.5rem 2rem;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`;

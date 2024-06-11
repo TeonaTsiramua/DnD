@@ -18,7 +18,7 @@ import {
   SWrapper,
 } from './styles';
 
-const Sentence = ({ words }) => {
+const Sentence = ({ words, category }) => {
   const [result, setResult] = useState(false);
 
   const {
@@ -32,6 +32,7 @@ const Sentence = ({ words }) => {
     clearSelectedWords,
     goBack,
   } = useSentenceState(
+    category,
     words === 3 ? threeWordSentence : fourWordSentence,
     words === 3 ? get5Steps : get7Steps
   );
