@@ -1,9 +1,18 @@
-# React + Vite
+# Framer Motion Drag-and-Drop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository showcases a collection of interactive and fun drag-and-drop games built with React and Framer Motion.Refresh
 
-Currently, two official plugins are available:
+# Introduction
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# DnD
+This project contains a selection of drag-and-drop games designed to provide an engaging and interactive experience. Each game is implemented using React and Framer Motion, leveraging their capabilities to create smooth and responsive interactions.
+
+# Features
+
+Drag-and-Drop Component: Basic drag-and-drop functionality.
+Reorder Game: Reorder items to complete the challenge.
+Match Game: Match icons to their corresponding words.
+Make Sentence: Form complete sentences by dragging and dropping words.
+
+# Demo
+
+Check out a live demo of the project [Demo](https://github.com/TeonaTsiramua/DnD)
