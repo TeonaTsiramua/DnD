@@ -2,17 +2,17 @@
 
 This repository showcases a collection of interactive and fun drag-and-drop games built with React and Framer Motion.Refresh
 
-# Introduction
+## Introduction
 
 This project contains a selection of drag-and-drop games designed to provide an engaging and interactive experience. Each game is implemented using React and Framer Motion, leveraging their capabilities to create smooth and responsive interactions.
 
-# Features
+## Features
 
-Drag-and-Drop Component: Basic drag-and-drop functionality.
-Reorder Game: Reorder items to complete the challenge.
-Match Game: Match icons to their corresponding words.
-Make Sentence: Form complete sentences by dragging and dropping words.
+- **Drag-and-Drop Component:** Basic drag-and-drop functionality.
+- **Reorder Game:** Reorder items to complete the challenge.
+- **Match Game:** Match icons to their corresponding words.
+- **Make Sentence:** Form complete sentences by dragging and dropping words.
 
-# Demo
+## Demo
 
 Check out a live demo of the project [Demo](https://github.com/TeonaTsiramua/DnD)
