@@ -56,12 +56,12 @@ const Sentence = ({ words }) => {
       onDragEnd: (event, info) => handleDragEnd(event, info, item),
       whileHover: {
         scale: 1.1,
-        cursor: 'grab',
+        cursor: 'url(/assets/hand2.png), grab',
       },
       whileDrag: {
         scale: 1.2,
         boxShadow: '0 0 10px yellow',
-        cursor: 'grabbing',
+        cursor: 'url(/assets/grab2.png), grabbing',
         zIndex: 10,
       },
     };

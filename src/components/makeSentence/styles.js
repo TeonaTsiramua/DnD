@@ -42,7 +42,7 @@ export const SWord = styled(motion.div)`
   z-index: 2;
   opacity: ${({ $faded }) => ($faded ? 0 : 1)};
   font-size: ${({ $label }) => ($label ? '2rem' : '1.2rem')};
-  cursor: ${({ $faded }) => $faded && 'not-allowed'};
+  cursor: ${({ $faded }) => $faded && 'url(/assets/cancel.png), not-allowed'};
 `;
 
 export const SFadedWord = styled(SWord)`
@@ -70,6 +70,7 @@ export const SButton = styled.button`
   background-color: transparent;
   padding: 0;
   position: relative;
+  cursor: url('/assets/pointer.png'), pointer;
 
   &:hover::after {
     content: attr(data-tooltip);
@@ -87,6 +88,6 @@ export const SButton = styled.button`
   }
 
   &:disabled {
-    cursor: not-allowed;
+    cursor: url('/assets/cancellation.png'), not-allowed;
   }
 `;
