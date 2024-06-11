@@ -15,4 +15,4 @@ This project contains a selection of drag-and-drop games designed to provide an 
 
 ## Demo
 
-Check out a live demo of the project [Demo](https://github.com/TeonaTsiramua/DnD)
+Check out a live demo of the project [Demo](https://dn-d-eta.vercel.app/)
