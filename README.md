@@ -1,6 +1,6 @@
 # Framer Motion Drag-and-Drop
 
-This repository showcases a collection of interactive and fun drag-and-drop games built with React and Framer Motion.Refresh
+This repository showcases a collection of interactive and fun drag-and-drop games built with React and Framer Motion.
 
 ## Introduction
 
