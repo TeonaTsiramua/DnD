@@ -21,7 +21,7 @@ export const useSentenceState = (words, sentence, getSteps) => {
 
     const newFadedWords = newCurrentWords.filter((item) =>
       Object.values(selectedWords).some(
-        (selectedItem) => selectedItem && selectedItem.word === item.word
+        (selectedItem) => selectedItem && selectedItem.id === item.id
       )
     );
     setFadedWords(newFadedWords);
@@ -71,7 +71,7 @@ export const useSentenceState = (words, sentence, getSteps) => {
     setFadedWords(() => {
       const newFadedWords = currentWords.filter((item) =>
         Object.values(selectedWords).some(
-          (selectedItem) => selectedItem && selectedItem.word === item.word
+          (selectedItem) => selectedItem && selectedItem.id === item.id
         )
       );
       return newFadedWords;
@@ -79,6 +79,8 @@ export const useSentenceState = (words, sentence, getSteps) => {
   };
 
   return {
+    step,
+    setStep,
     selectedWords,
     fadedWords,
     highlightedBox,

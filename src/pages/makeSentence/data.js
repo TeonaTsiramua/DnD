@@ -1,4 +1,4 @@
-import { wordsData } from '../../data';
+import { wordsData } from '../../data/sentence';
 
 export const categories = [
   {

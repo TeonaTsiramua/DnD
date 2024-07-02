@@ -19,6 +19,8 @@ import {
 
 const Sentence = ({ words, data, handleNextSentence }) => {
   const {
+    step,
+    setStep,
     selectedWords,
     fadedWords,
     highlightedBox,
@@ -43,7 +45,7 @@ const Sentence = ({ words, data, handleNextSentence }) => {
   };
 
   const dragProps = (item) =>
-    !selectedWords.verb &&
+    (words === 3 ? step < 5 : step < 6) &&
     !fadedWords.includes(item) && {
       drag: true,
       dragConstraints: { top: 0, bottom: 0, left: 0, right: 0 },
@@ -64,6 +66,17 @@ const Sentence = ({ words, data, handleNextSentence }) => {
 
   return (
     <SContainer>
+      <button onClick={() => setStep(0)}>არსებითი სახელი</button>
+      <button onClick={() => setStep(1)}>ბრუნვის ნიშნები</button>
+      <button onClick={() => setStep(4)}>ზმნა</button>
+
+      {step === 0 && <p>არსებითი სახელი</p>}
+      {step === 1 && <p>ბრუნვის ნიშნები</p>}
+      {step === 2 && <p>არსებითი სახელი</p>}
+      {step === 3 && <p>თანდებულები</p>}
+      {step === 4 && <p>არსებითი სახელი</p>}
+      {step > 4 && <p>ზმნა</p>}
+
       <SWrapper>
         <SFadedWrapper>
           {currentWords.map((item) => (
@@ -76,7 +89,7 @@ const Sentence = ({ words, data, handleNextSentence }) => {
         {currentWords.map((item) => (
           <SWord
             {...dragProps(item)}
-            key={item.word}
+            key={item.id}
             $faded={fadedWords.includes(item)}
             $label={item.label}>
             {item.label || item.word}

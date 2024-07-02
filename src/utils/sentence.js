@@ -28,23 +28,47 @@ export const get5Steps = (step) => getSteps(step, 5);
 export const get7Steps = (step) => getSteps(step, 7);
 
 export const getWords = (step, words, stepsLength) => {
+  const noun = words.flatMap((word) => word.noun);
+  const sign = words.flatMap((word) => word.sign);
+  const verb = words.flatMap((word) => word.verb);
+  const adpositions = words.flatMap((word) => word.adpositions);
+
   switch (step) {
     case stepsLength:
-      return [];
+      return verb;
     case stepsLength - 1:
-      return words.flatMap((word) => word.verb);
+      return verb;
     case 0:
     case 2:
     case 4:
-      return words.flatMap((word) => word.noun);
+      return noun;
     case 1:
     case 5:
-      return words.flatMap((word) => word.sign);
+      return sign;
     case 3:
-      return stepsLength === 5
-        ? words.flatMap((word) => word.sign)
-        : words.flatMap((word) => word.sign2);
+      return stepsLength === 5 ? sign : adpositions;
     default:
-      return [];
+      return verb;
   }
+};
+
+export const generateWords = (array, word1, word2) => {
+  function shuffleArray(array) {
+    return array.sort(() => 0.5 - Math.random());
+  }
+
+  const filteredWord = array.filter(
+    (item) => item.word !== word1 && item.word !== word2
+  );
+
+  const selectedWords = array.filter(
+    (item) => item.word === word1 || item.word === word2
+  );
+
+  const shuffled = shuffleArray(filteredWord);
+  const randomItems = shuffled.slice(0, 5);
+
+  const words = shuffleArray([...selectedWords, ...randomItems]);
+
+  return words;
 };
