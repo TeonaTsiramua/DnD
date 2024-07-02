@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useSentenceState } from '../../hooks/useSentenceState';
 import {
   fourWordSentence,
@@ -18,9 +17,7 @@ import {
   SWrapper,
 } from './styles';
 
-const Sentence = ({ words, category }) => {
-  const [result, setResult] = useState(false);
-
+const Sentence = ({ words, data, handleNextSentence }) => {
   const {
     selectedWords,
     fadedWords,
@@ -32,19 +29,17 @@ const Sentence = ({ words, category }) => {
     clearSelectedWords,
     goBack,
   } = useSentenceState(
-    category,
+    data,
     words === 3 ? threeWordSentence : fourWordSentence,
     words === 3 ? get5Steps : get7Steps
   );
 
   const hanleReset = () => {
     clearSelectedWords();
-    setResult(false);
   };
 
   const handleGoBack = () => {
     goBack();
-    setResult(false);
   };
 
   const dragProps = (item) =>
@@ -83,8 +78,7 @@ const Sentence = ({ words, category }) => {
             {...dragProps(item)}
             key={item.word}
             $faded={fadedWords.includes(item)}
-            $label={item.label}
-          >
+            $label={item.label}>
             {item.label || item.word}
           </SWord>
         ))}
@@ -96,8 +90,7 @@ const Sentence = ({ words, category }) => {
             <SBox
               key={boxType}
               ref={refs[boxType]}
-              $highlighted={highlightedBox === boxType}
-            >
+              $highlighted={highlightedBox === boxType}>
               {selectedItem && (
                 <SWord $label={selectedItem.label}>
                   {selectedItem.label || selectedItem.word}
@@ -111,27 +104,27 @@ const Sentence = ({ words, category }) => {
         <SButton
           disabled={!selectedWords.noun1}
           onClick={hanleReset}
-          data-tooltip='Reset'
-        >
+          data-tooltip="Reset">
           🔄
         </SButton>
         <SButton
           disabled={!selectedWords.noun1}
           onClick={handleGoBack}
-          data-tooltip='Go Back'
-        >
+          data-tooltip="Go Back">
           ⬅️
-        </SButton>
-        <SButton
-          disabled={!selectedWords.verb}
-          data-tooltip='Submit'
-          onClick={() => setResult(true)}
-        >
-          ✅
         </SButton>
       </SWrapper>
 
-      {result && selectedWords.verb && <Result selectedWords={selectedWords} />}
+      <Result selectedWords={selectedWords} />
+
+      <button
+        disabled={!selectedWords.verb}
+        onClick={() => {
+          handleNextSentence();
+          hanleReset();
+        }}>
+        შემდეგი
+      </button>
     </SContainer>
   );
 };

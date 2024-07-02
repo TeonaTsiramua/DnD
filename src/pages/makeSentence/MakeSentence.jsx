@@ -1,16 +1,28 @@
 import { useState } from 'react';
 import { Button, Sentence } from '../../components';
 import { SButton, SContainer, SWrapper } from './styles';
-import { wordsData } from '../../data';
+import { categories } from './data';
 
 const MakeSentence = () => {
   const [words, setWords] = useState(null);
   const [category, setCategory] = useState(null);
   const [start, setStart] = useState(false);
+  const [sentence, setSentence] = useState(0);
 
   const handleStart = () => {
     if (words && category) {
       setStart(true);
+    }
+  };
+
+  const handleNextSentence = () => {
+    if (sentence < 4) {
+      setSentence((prevStep) => prevStep + 1);
+    } else {
+      setStart(false);
+      setSentence(0);
+      setCategory(null);
+      setWords(null);
     }
   };
 
@@ -30,20 +42,28 @@ const MakeSentence = () => {
           </SWrapper>
           <h2>Select category</h2>
           <SWrapper>
-            <Button
-              onClick={() => setCategory(wordsData)}
-              selected={category === wordsData}
-            >
-              Words
-            </Button>
+            {categories.map((item) => (
+              <Button
+                key={item.id}
+                item={item}
+                onClick={() => setCategory(item)}
+                selected={category?.id === item.id}>
+                {item.name}
+              </Button>
+            ))}
           </SWrapper>
+
           <SButton disabled={!words || !category} onClick={handleStart}>
             Start
           </SButton>
         </>
       )}
       {start && words && category && (
-        <Sentence words={words} category={category} />
+        <Sentence
+          words={words}
+          data={category.data[sentence]}
+          handleNextSentence={handleNextSentence}
+        />
       )}
     </SContainer>
   );

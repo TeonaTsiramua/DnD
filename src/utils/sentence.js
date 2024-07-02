@@ -27,20 +27,23 @@ export const getSteps = (step, count) => {
 export const get5Steps = (step) => getSteps(step, 5);
 export const get7Steps = (step) => getSteps(step, 7);
 
-export const getWords = (step, words, wordsLength) => {
+export const getWords = (step, words, stepsLength) => {
   switch (step) {
-    case wordsLength:
+    case stepsLength:
       return [];
-    case wordsLength - 1:
+    case stepsLength - 1:
       return words.flatMap((word) => word.verb);
     case 0:
     case 2:
     case 4:
       return words.flatMap((word) => word.noun);
     case 1:
-    case 3:
     case 5:
       return words.flatMap((word) => word.sign);
+    case 3:
+      return stepsLength === 5
+        ? words.flatMap((word) => word.sign)
+        : words.flatMap((word) => word.sign2);
     default:
       return [];
   }
